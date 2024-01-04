@@ -3,8 +3,8 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kobciye/blocs/countries_list/countries_list_cubit.dart';
-import 'package:kobciye/blocs/country_search/countries_search_cubit.dart';
+import 'package:kobciye/blocs/countries/countries_list/countries_list_cubit.dart';
+import 'package:kobciye/blocs/countries/country_search/countries_search_cubit.dart';
 import 'package:kobciye/models/country_model.dart';
 
 part 'filter_countries_state.dart';

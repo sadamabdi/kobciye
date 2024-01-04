@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kobciye/blocs/country_search/countries_search_cubit.dart';
-import 'package:kobciye/blocs/filter_countries/filter_countries_cubit.dart';
-import 'package:kobciye/blocs/selected_countries/selected_countries_cubit.dart';
+import 'package:kobciye/blocs/countries/country_search/countries_search_cubit.dart';
+import 'package:kobciye/blocs/countries/filter_countries/filter_countries_cubit.dart';
+import 'package:kobciye/blocs/countries/selected_countries/selected_countries_cubit.dart';
 import 'package:kobciye/utils/custom_image.dart';
 
 class CountriesScreen extends StatelessWidget {
