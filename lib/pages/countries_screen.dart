@@ -51,11 +51,12 @@ class CountriesScreen extends StatelessWidget {
                       itemCount: state.filteredCountries.length,
                       itemBuilder:(context, index) => ListTile(
                         leading: ClipOval(
-                          child: CustomImage(path: state.filteredCountries[index].url,width: 40,height: 40,),
+                          child: CustomImage(path: state.filteredCountries[index].flags.png,width: 40,height: 40,),
                         ),
-                        title: Text(state.filteredCountries[index].title),
+                        title: Text(state.filteredCountries[index].name),
                         onTap: () {
                           context.read<SelectedCountriesCubit>().selectedCountry(state.filteredCountries[index]);
+                          context.read<CountriesSearchCubit>().setSearch('');
                           Navigator.pop(context);
                         },
                       ), 

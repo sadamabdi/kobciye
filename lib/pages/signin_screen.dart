@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kobciye/blocs/selected_countries/selected_countries_cubit.dart';
+import 'package:kobciye/utils/custom_button.dart';
 import '../blocs/countries_list/countries_list_cubit.dart';
 import '../constants/images.dart';
 import '../core/router_name.dart';
@@ -28,23 +29,29 @@ class SigninScreen extends StatelessWidget {
                   labelText: 'phone number',
                   prefixIcon: GestureDetector(
                     onTap: () {
+                      context.read<CountriesListCubit>().getCountries();
                       Navigator.pushNamed(context, RouteNames.countriesScreen);
                     },
-                    child:  SizedBox(
+                    child: SizedBox(
                       width: 100,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: BlocBuilder<SelectedCountriesCubit, SelectedCountryState>(
+                        child: BlocBuilder<SelectedCountriesCubit,
+                            SelectedCountryState>(
                           builder: (context, state) {
-                            return  Row(
+                            return Row(
                               children: [
                                 CustomImage(
-                                  path: state.selectedCountry.url != null ? Images.logo : Images.logo,
-                                  height: 40,
-                                  width: 50,
+                                  path: state.selectedCountry?.flags.png ??
+                                      Images.logo,
+                                  height: 25,
+                                  width: 30,
                                   fit: BoxFit.cover,
                                 ),
-                                Text(state.selectedCountry.id.toString()),
+                                const SizedBox(width: 5),
+                                Text(state.selectedCountry?.callingCodes == null
+                                    ? ''
+                                    : '+${state.selectedCountry?.callingCodes[0]}'),
                               ],
                             );
                           },
@@ -59,11 +66,11 @@ class SigninScreen extends StatelessWidget {
                 onSaved: (String? value) {},
               ),
               const SizedBox(height: 30.0),
-              ElevatedButton(
-                  onPressed: () {
-                    context.read<CountriesListCubit>().getCountries();
-                  },
-                  child: const Text('Sign In'))
+              PrimaryButton(
+                text: 'Sign In',
+                onPressed: () {},
+                borderRadiusSize: 15,
+              ),
             ],
           ),
         ),

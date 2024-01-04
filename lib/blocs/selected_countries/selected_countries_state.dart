@@ -1,12 +1,12 @@
 part of 'selected_countries_cubit.dart';
 
 class SelectedCountryState extends Equatable {
-  final CountryModel selectedCountry;
+  final CountryModel? selectedCountry;
 
   const SelectedCountryState({required this.selectedCountry});
 
   factory SelectedCountryState.inital() {
-    return const SelectedCountryState(selectedCountry: CountryModel(id: 0, title: '', url: ''));
+    return const SelectedCountryState(selectedCountry: null);
   }
 
 
@@ -22,5 +22,5 @@ class SelectedCountryState extends Equatable {
   }
 
   @override
-  List<Object> get props => [selectedCountry];
+  List<Object> get props => [selectedCountry ?? []];
 }

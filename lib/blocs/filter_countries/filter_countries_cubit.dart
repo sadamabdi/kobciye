@@ -31,7 +31,7 @@ class FilterCountriesCubit extends Cubit<FilterCountriesState> {
      List<CountryModel> filteredCountries = countriesListCubit.state.countries;
 
      if(countriesSearchCubit.state.searchTerm.isNotEmpty) {
-       filteredCountries = filteredCountries.where((CountryModel country) => country.title.toLowerCase().contains(countriesSearchCubit.state.searchTerm)).toList();
+       filteredCountries = filteredCountries.where((CountryModel country) => country.name.toLowerCase().contains(countriesSearchCubit.state.searchTerm)).toList();
      }
 
      emit(state.copyWith(filteredCountries: filteredCountries));
