@@ -9,9 +9,10 @@ part 'countries_list_state.dart';
 
 class CountriesListCubit extends Cubit<CountriesListState> {
   final CountriesRepository _countriesRepository;
-  CountriesListCubit({required countriesRepository})
+  final List<CountryModel> allCountries;
+  CountriesListCubit({required countriesRepository,required this.allCountries})
       : _countriesRepository = countriesRepository,
-        super(CountriesListState.inital());
+        super(CountriesListState(countries: allCountries, countriesStatus: CountriesStatus.initial, error: const CustomError()));
 
   Future<void> getCountries() async {
     emit(state.copyWith(countriesStatus: CountriesStatus.loading));

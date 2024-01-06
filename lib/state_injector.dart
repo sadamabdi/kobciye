@@ -58,6 +58,7 @@ class StateInjector {
     ),
     BlocProvider<CountriesListCubit>(
       create: (BuildContext context) => CountriesListCubit(
+        allCountries: context.read<SplashCubit>().allCountries! ,
           countriesRepository: context.read<CountriesRepository>()),
     ),
     BlocProvider<FilterCountriesCubit>(
@@ -67,7 +68,10 @@ class StateInjector {
           countriesListCubit: BlocProvider.of<CountriesListCubit>(context)),
     ),
     BlocProvider<SelectedCountriesCubit>(
-      create: (BuildContext context) => SelectedCountriesCubit(),
+      create: (BuildContext context) => SelectedCountriesCubit(
+        initialCountry: context.read<SplashCubit>().initialCountry!
+      
+      ),
     ),
   ];
 }

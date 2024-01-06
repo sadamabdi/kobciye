@@ -5,7 +5,12 @@ import 'package:kobciye/models/country_model.dart';
 part 'selected_countries_state.dart';
 
 class SelectedCountriesCubit extends Cubit<SelectedCountryState> {
-  SelectedCountriesCubit() : super(SelectedCountryState.inital());
+
+  final CountryModel initialCountry;
+   
+  SelectedCountriesCubit({required this.initialCountry}) : super(SelectedCountryState(selectedCountry: initialCountry));
+
+  
 
   void selectedCountry(CountryModel newSelectedCountry) {
     emit(state.copyWith(selectedCountry: newSelectedCountry));

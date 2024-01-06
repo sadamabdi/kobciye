@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter/material.dart';
 import 'package:kobciye/blocs/splash/splash_cubit.dart';
+import 'package:kobciye/constants/dimensions.dart';
 
 class SettingErrorWidget extends StatelessWidget {
   const SettingErrorWidget({
@@ -20,7 +21,7 @@ class SettingErrorWidget extends StatelessWidget {
         children: [
           Text(
             message,
-            style: const TextStyle(color: Colors.red, fontSize: 20),
+            style:  TextStyle(color: Colors.red, fontSize: Dimensions.paddingSizeLarge),
           ),
           TextButton(
             onPressed: () {

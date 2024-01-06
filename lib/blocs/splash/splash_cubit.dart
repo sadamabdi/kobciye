@@ -17,6 +17,8 @@ class SplashCubit extends Cubit<SplashState> {
 
   List<CountryModel>? allCountries;
 
+  CountryModel? initialCountry;
+
   Future<void> loadCountries() async {
     emit(const SplashStateLoading());
 
@@ -27,8 +29,13 @@ class SplashCubit extends Cubit<SplashState> {
       },
       (value) {
         allCountries = value;
+        getInitialCountry();
         emit(SplashStateLoaded(value));
       },
     );
+  }
+
+  void getInitialCountry ()  {
+   initialCountry  = allCountries?.firstWhere((CountryModel country) => country.name == 'Somalia');
   }
 }

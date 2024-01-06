@@ -5,7 +5,7 @@ import 'package:kobciye/models/country_model.dart';
 import 'network_parser.dart';
 
 abstract class RemoteDataSource {
-  Future<List<CountryModel>> httpGet({required String url});
+  Future<dynamic> httpGet({required String url});
   Future<dynamic> httpPost({required Map<String,dynamic> body,required String url});
   // Future<String> passwordChange(
   //     ChangePasswordStateModel changePassData, String StudentId);
@@ -20,17 +20,14 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
 
   @override
-  Future<List<CountryModel>> httpGet({required String url}) async {
+  Future<dynamic> httpGet({required String url}) async {
      final headers = {'Accept': 'application/json'};
     final uri = Uri.parse(url);
 
     final clientMethod = http.get(uri, headers: headers);
     final responseJsonBody =
         await NetworkParser.callClientWithCatchException(() => clientMethod);
-    final mapList = responseJsonBody as List;
-
-    return List<CountryModel>.from(
-        mapList.map((e) => CountryModel.fromMap(e)));
+    return responseJsonBody;
   }
 
 

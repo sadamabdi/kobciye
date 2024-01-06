@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../constants/app_constants.dart';
 
 ThemeData light({Color color = const Color(0xFF039D55)}) => ThemeData(
-  fontFamily: fontFamily,
+  fontFamily: AppConstants.appName,
   primaryColor: color,
   secondaryHeaderColor: const Color(0xFF1ED7AA),
   disabledColor: const Color(0xFFBABFC4),

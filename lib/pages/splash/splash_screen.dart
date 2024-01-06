@@ -1,12 +1,9 @@
-import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kobciye/blocs/splash/splash_cubit.dart';
 import 'package:kobciye/constants/images.dart';
 import 'package:kobciye/core/router_name.dart';
 import 'package:kobciye/utils/custom_image.dart';
-
-import '../../constants/dimensions.dart';
 import 'widget/setting_error_message.dart';
 
 class SplashScreen extends StatelessWidget {

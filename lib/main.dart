@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
       child: MultiBlocProvider(
         providers: StateInjector.blocProviders,
         child: MaterialApp(
-          title: appName,
+          title: AppConstants.appName,
           debugShowCheckedModeBanner: false,
           theme: light(),
           onGenerateRoute: RouteNames.generateRoute,

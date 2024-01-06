@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kobciye/pages/authentication/otp_screen.dart';
-import 'package:kobciye/pages/countries_screen.dart';
+import 'package:kobciye/pages/countries/countries_screen.dart';
 import 'package:kobciye/pages/authentication/signin_screen.dart';
 import 'package:kobciye/pages/splash/splash_screen.dart';
 

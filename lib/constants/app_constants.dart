@@ -1,8 +1,10 @@
 
 
-  const String appName = "Kobciye";
-  const String splashTitle = "Welcome Shodog primary & Secondary School";
+class AppConstants {
+ static const String appName = "Kobciye";
+  static const String splashTitle = "Welcome Shodog primary & Secondary School";
 
-  const String cachedUserResponseKey = "cachhUserResponse";
+  static const String cachedUserResponseKey = "cachhUserResponse";
 
-  const String fontFamily = 'Roboto';
+  static const String fontFamily = 'Roboto';
+}

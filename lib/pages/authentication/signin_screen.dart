@@ -29,7 +29,6 @@ class SigninScreen extends StatelessWidget {
                   labelText: 'phone number',
                   prefixIcon: GestureDetector(
                     onTap: () {
-                      context.read<CountriesListCubit>().getCountries();
                       Navigator.pushNamed(context, RouteNames.countriesScreen);
                     },
                     child: SizedBox(
@@ -42,16 +41,13 @@ class SigninScreen extends StatelessWidget {
                             return Row(
                               children: [
                                 CustomImage(
-                                  path: state.selectedCountry?.flags.png ??
-                                      Images.logo,
+                                  path: state.selectedCountry?.flags.png,
                                   height: 25,
                                   width: 30,
                                   fit: BoxFit.cover,
                                 ),
                                 const SizedBox(width: 5),
-                                Text(state.selectedCountry?.callingCodes == null
-                                    ? ''
-                                    : '+${state.selectedCountry?.callingCodes[0]}'),
+                                Text('+${state.selectedCountry?.callingCodes[0]}'),
                               ],
                             );
                           },
@@ -69,7 +65,7 @@ class SigninScreen extends StatelessWidget {
               PrimaryButton(
                 text: 'Sign In',
                 onPressed: () {
-                  Navigator.pushReplacementNamed(
+                  Navigator.pushNamed(
                       context, RouteNames.otpScreen);
                 },
                 borderRadiusSize: 15,
