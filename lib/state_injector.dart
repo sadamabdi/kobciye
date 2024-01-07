@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart';
 import 'package:kobciye/blocs/countries/selected_countries/selected_countries_cubit.dart';
+import 'package:kobciye/blocs/cubit/send_otp_cubit.dart';
 import 'package:kobciye/blocs/splash/splash_cubit.dart';
+import 'package:kobciye/repositories/otp_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:kobciye/blocs/countries/countries_list/countries_list_cubit.dart';
 import 'package:kobciye/blocs/countries/country_search/countries_search_cubit.dart';
@@ -45,20 +47,24 @@ class StateInjector {
         remoteDataSource: context.read<RemoteDataSource>(),
       ),
     ),
+    RepositoryProvider<OtpRepository>(
+      create: (context) => OtpRepositoryImp(
+        remoteDataSource: context.read<RemoteDataSource>(),
+      ),
+    ),
   ];
 
   static final blocProviders = <BlocProvider>[
     BlocProvider<SplashCubit>(
-      create: (BuildContext context) => SplashCubit(
-        countriesRepository: context.read<CountriesRepository>()
-      ),
+      create: (BuildContext context) =>
+          SplashCubit(countriesRepository: context.read<CountriesRepository>()),
     ),
     BlocProvider<CountriesSearchCubit>(
       create: (BuildContext context) => CountriesSearchCubit(),
     ),
     BlocProvider<CountriesListCubit>(
       create: (BuildContext context) => CountriesListCubit(
-        allCountries: context.read<SplashCubit>().allCountries! ,
+          allCountries: context.read<SplashCubit>().allCountries!,
           countriesRepository: context.read<CountriesRepository>()),
     ),
     BlocProvider<FilterCountriesCubit>(
@@ -69,9 +75,11 @@ class StateInjector {
     ),
     BlocProvider<SelectedCountriesCubit>(
       create: (BuildContext context) => SelectedCountriesCubit(
-        initialCountry: context.read<SplashCubit>().initialCountry!
-      
-      ),
+          initialCountry: context.read<SplashCubit>().initialCountry!),
+    ),
+    BlocProvider<SendOtpCubit>(
+      create: (BuildContext context) =>
+          SendOtpCubit(otpRepository: context.read<OtpRepository>()),
     ),
   ];
 }

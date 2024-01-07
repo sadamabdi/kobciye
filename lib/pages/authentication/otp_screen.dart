@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kobciye/blocs/cubit/send_otp_cubit.dart';
 import 'package:kobciye/constants/dimensions.dart';
 import 'package:kobciye/constants/images.dart';
+import 'package:kobciye/utils/custom_button.dart';
 import 'package:kobciye/utils/custom_image.dart';
 import 'package:kobciye/utils/rounded_app_bar.dart';
 import 'package:otp_text_field/otp_field.dart';
+import 'package:otp_text_field/otp_field_style.dart';
 import 'package:otp_text_field/style.dart';
 
 class OtpScreen extends StatefulWidget {
@@ -14,43 +18,82 @@ class OtpScreen extends StatefulWidget {
 }
 
 class _OtpScreenState extends State<OtpScreen> {
-   OtpFieldController otpController = OtpFieldController();
+  String otpValue = '';
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: RoundedAppBar(),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const CustomImage(
-              path: Images.logo,
-              width: 200,
-              height: 200,
-            ),
-            const SizedBox(height: 30),
-            const Text('Hubin'),
-            const Text('Fadlan gali code loo soo diray'),
-            const SizedBox(height: Dimensions.paddingSizeDefault),
-           OTPTextField(
-            controller: otpController,
-            length: 5,
-            width: MediaQuery.of(context).size.width,
-            textFieldAlignment: MainAxisAlignment.spaceAround,
-            fieldWidth: 60,
-            fieldStyle: FieldStyle.box,
-            keyboardType: TextInputType.number,
-            // outlineBorderRadius: 15,
-            style: const TextStyle(fontSize: 17),
-            onChanged: (pin) {
-              
+    final otpResponse = context.read<SendOtpCubit>().otpResponse;
+    return SafeArea(
+      child: Scaffold(
+        // appBar: RoundedAppBar(),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+          child: BlocBuilder<SendOtpCubit, SendOtpState>(
+            builder: (context, state) {
+              return ListView(
+                children: [
+                  const CustomImage(
+                    path: Images.logo,
+                    width: 200,
+                    height: 200,
+                  ),
+                  const SizedBox(height: 15),
+                  Text(
+                    textAlign: TextAlign.center,
+                    'Hubin',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30,
+                        color: Theme.of(context).primaryColor),
+                  ),
+                  const SizedBox(height: 10),
+                  const Text(
+                    'Fadlan gali code loo soo diray',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Colors.grey, fontWeight: FontWeight.w400),
+                  ),
+                  const SizedBox(height: 5),
+                  Text(
+                    otpResponse!.to,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                        color: Colors.grey, fontWeight: FontWeight.w400),
+                  ),
+                  const SizedBox(height: Dimensions.paddingSizeDefault),
+                  OTPTextField(
+                      length: 6,
+                      width: MediaQuery.of(context).size.width,
+                      textFieldAlignment: MainAxisAlignment.spaceAround,
+                      fieldWidth: 50,
+                      fieldStyle: FieldStyle.box,
+                      keyboardType: TextInputType.number,
+                      otpFieldStyle: OtpFieldStyle(
+                        focusBorderColor: Theme.of(context).primaryColor,
+                      ),
+                      // outlineBorderRadius: 15,
+                      style: const TextStyle(fontSize: 17),
+                      onChanged: (pin) {},
+                      onCompleted: (pin) {
+                        otpValue = pin;
+                      }),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  PrimaryButton(
+                      text: 'Hubi',
+                      borderRadiusSize: 15,
+                      onPressed: () {
+                        Map<String, dynamic> body = {
+                          "mobileNumber": otpResponse.to.toString(),
+                          "code": otpValue,
+                          "verificationId": otpResponse.verificationId
+                        };
+                        context.read<SendOtpCubit>().verifyOtp(body);
+                      })
+                ],
+              );
             },
-            onCompleted: (pin) {
-             
-            }),
-      
-    
-          ],
+          ),
         ),
       ),
     );

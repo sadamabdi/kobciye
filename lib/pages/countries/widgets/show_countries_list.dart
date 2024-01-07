@@ -32,9 +32,9 @@ class ShowCountriesList extends StatelessWidget {
             itemCount: state.filteredCountries.length,
             itemBuilder:(context, index) => ListTile(
               leading: ClipOval(
-                child: CustomImage(path: state.filteredCountries[index].flags.png,width: 40,height: 40,),
+                child: CustomImage(path: state.filteredCountries[index].flagUrl1,width: 40,height: 40,),
               ),
-              title: Text(state.filteredCountries[index].name,style: const  TextStyle(fontFamily: AppConstants.fontFamily)),
+              title: Text(state.filteredCountries[index].countryName,style: const  TextStyle(fontFamily: AppConstants.fontFamily)),
               onTap: () {
                 context.read<SelectedCountriesCubit>().selectedCountry(state.filteredCountries[index]);
                 context.read<CountriesSearchCubit>().setSearch('');

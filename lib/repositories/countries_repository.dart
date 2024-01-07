@@ -18,8 +18,8 @@ class CountriesRepositoryImp extends CountriesRepository {
   @override
   Future<Either<Failure, List<CountryModel>>> getCountries() async {
     try {
-      final resp = await remoteDataSource.httpGet(url: RemoteUrls.rootUrl);
-        final mapList = resp as List;
+      final resp = await remoteDataSource.httpGet(url: RemoteUrls.countries);
+        final mapList = resp.data as List;
 
     final result =  List<CountryModel>.from(
         mapList.map((e) => CountryModel.fromMap(e)));

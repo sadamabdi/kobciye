@@ -35,7 +35,8 @@ class SplashCubit extends Cubit<SplashState> {
     );
   }
 
-  void getInitialCountry ()  {
-   initialCountry  = allCountries?.firstWhere((CountryModel country) => country.name == 'Somalia');
+  void getInitialCountry() {
+    initialCountry = allCountries
+        ?.firstWhere((CountryModel country) => country.callingCodes == 252);
   }
 }

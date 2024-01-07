@@ -4,40 +4,47 @@ import 'dart:convert';
 import 'package:equatable/equatable.dart';
 
 class CountryModel extends Equatable {
-  final String name;
-  final List<dynamic> callingCodes;
-  final Flags flags;
+  final int countryId;
+  final String countryName;
+  final int callingCodes;
+  final String flagUrl1;
 
-  const CountryModel({required this.name, required this.callingCodes, required this.flags});
+  const CountryModel({required this.countryId, required this.countryName, required this.callingCodes, required this.flagUrl1});
 
   @override
-  String toString() => 'CountryModel(name: $name, callingCodes: $callingCodes, flags: $flags)';
+  String toString() {
+    return 'CountryModel(countryId: $countryId, countryName: $countryName, callingCodes: $callingCodes, flagUrl1: $flagUrl1)';
+  }
 
   CountryModel copyWith({
-    String? name,
-    List<dynamic>? callingCodes,
-    Flags? flags,
+    int? countryId,
+    String? countryName,
+    int? callingCodes,
+    String? flagUrl1,
   }) {
     return CountryModel(
-      name: name ?? this.name,
+      countryId: countryId ?? this.countryId,
+      countryName: countryName ?? this.countryName,
       callingCodes: callingCodes ?? this.callingCodes,
-      flags: flags ?? this.flags,
+      flagUrl1: flagUrl1 ?? this.flagUrl1,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'name': name,
+      'countryId': countryId,
+      'countryName': countryName,
       'callingCodes': callingCodes,
-      'flags': flags.toMap(),
+      'flagUrl1': flagUrl1,
     };
   }
 
   factory CountryModel.fromMap(Map<String, dynamic> map) {
     return CountryModel(
-      name: (map["name"] ?? '') as String,
-      callingCodes: List<dynamic>.from(((map['callingCodes'] ?? const <dynamic>[]) as List<dynamic>),),
-      flags: Flags.fromMap((map["flags"]?? Map<String,dynamic>.from({})) as Map<String,dynamic>),
+      countryId: (map["countryId"] ?? 0) as int,
+      countryName: (map["countryName"] ?? '') as String,
+      callingCodes: (map["callingCodes"] ?? 0) as int,
+      flagUrl1: (map["flagUrl1"] ?? '') as String,
     );
   }
 
@@ -46,46 +53,5 @@ class CountryModel extends Equatable {
   factory CountryModel.fromJson(String source) => CountryModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  List<Object> get props => [name, callingCodes, flags];
-}
-
-class Flags extends Equatable {
-  final String svg;
-  final String png;
-
-  Flags({required this.svg, required this.png});
-
-  @override
-  String toString() => 'Flags(svg: $svg, png: $png)';
-
-  Flags copyWith({
-    String? svg,
-    String? png,
-  }) {
-    return Flags(
-      svg: svg ?? this.svg,
-      png: png ?? this.png,
-    );
+  List<Object> get props => [countryId, countryName, callingCodes, flagUrl1];
   }
-
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'svg': svg,
-      'png': png,
-    };
-  }
-
-  factory Flags.fromMap(Map<String, dynamic> map) {
-    return Flags(
-      svg: (map["svg"] ?? '') as String,
-      png: (map["png"] ?? '') as String,
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory Flags.fromJson(String source) => Flags.fromMap(json.decode(source) as Map<String, dynamic>);
-
-  @override
-  List<Object> get props => [svg, png];
-}
