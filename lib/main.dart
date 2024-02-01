@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: light(),
           onGenerateRoute: RouteNames.generateRoute,
-          initialRoute: RouteNames.splashScreen,
+          initialRoute: RouteNames.homeScreen,
           builder: (context, child) {
             return MediaQuery(
               data: MediaQuery.of(context)

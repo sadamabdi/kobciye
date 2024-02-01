@@ -5,7 +5,6 @@ import 'package:kobciye/constants/dimensions.dart';
 import 'package:kobciye/constants/images.dart';
 import 'package:kobciye/utils/custom_button.dart';
 import 'package:kobciye/utils/custom_image.dart';
-import 'package:kobciye/utils/rounded_app_bar.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/otp_field_style.dart';
 import 'package:otp_text_field/style.dart';
@@ -38,7 +37,7 @@ class _OtpScreenState extends State<OtpScreen> {
                   ),
                   const SizedBox(height: 15),
                   Text(
-                    textAlign: TextAlign.center,
+                    
                     'Hubin',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -48,14 +47,14 @@ class _OtpScreenState extends State<OtpScreen> {
                   const SizedBox(height: 10),
                   const Text(
                     'Fadlan gali code loo soo diray',
-                    textAlign: TextAlign.center,
+                  
                     style: TextStyle(
                         color: Colors.grey, fontWeight: FontWeight.w400),
                   ),
                   const SizedBox(height: 5),
                   Text(
                     otpResponse!.to,
-                    textAlign: TextAlign.center,
+                 
                     style: const TextStyle(
                         color: Colors.grey, fontWeight: FontWeight.w400),
                   ),

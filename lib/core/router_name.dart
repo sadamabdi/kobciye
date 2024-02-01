@@ -7,7 +7,7 @@ import 'package:kobciye/pages/splash/splash_screen.dart';
 import '../pages/home/home_screen.dart';
 
 class RouteNames {
-  static const String splashScreen = '/';
+  static const String splashScreen = '/splash';
   static const String countriesScreen = '/countries';
   static const String signinScreen = '/signinScreen';
   static const String homeScreen = '/homeScreen';

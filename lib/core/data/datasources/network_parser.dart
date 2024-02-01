@@ -113,5 +113,4 @@ class NetworkParser {
     }
     return 'Credentials does not match';
   }
-
 }
