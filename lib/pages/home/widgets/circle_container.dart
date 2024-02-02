@@ -10,11 +10,12 @@ class ProfitCard extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    return Row(
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         Container(
-          height: screenHeight * 0.12,
-          width: screenWidth * 0.22, // Adjust the width as needed
+          height: screenHeight * 0.15,
+          width: screenWidth * 0.3, // Adjust the width as needed
           // Adjust the height as needed
           decoration: BoxDecoration(
             shape: BoxShape.circle,
@@ -37,7 +38,7 @@ class ProfitCard extends StatelessWidget {
           ),
         ),
         const SizedBox(
-          width: 10,
+          width: 20,
         ),
         Expanded(
           child: Text(
