@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart';
 import 'package:kobciye/blocs/countries/selected_countries/selected_countries_cubit.dart';
-import 'package:kobciye/blocs/cubit/send_otp_cubit.dart';
+import 'package:kobciye/blocs/sendOtp/send_otp_cubit.dart';
 import 'package:kobciye/blocs/splash/splash_cubit.dart';
+import 'package:kobciye/blocs/verifyOtp/verify_otp_cubit.dart';
 import 'package:kobciye/repositories/otp_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:kobciye/blocs/countries/countries_list/countries_list_cubit.dart';
@@ -11,6 +12,7 @@ import 'package:kobciye/blocs/countries/country_search/countries_search_cubit.da
 import 'package:kobciye/repositories/countries_repository.dart';
 
 import 'blocs/countries/filter_countries/filter_countries_cubit.dart';
+import 'core/data/datasources/local_data_source.dart';
 import 'core/data/datasources/remote_data_source.dart';
 
 class StateInjector {
@@ -36,11 +38,11 @@ class StateInjector {
       ),
     ),
 
-    // RepositoryProvider<LocalDataSource>(
-    //   create: (context) => LocalDataSourceImpl(
-    //     sharedPreferences: context.read(),
-    //   ),
-    // ),
+    RepositoryProvider<LocalDataSource>(
+      create: (context) => LocalDataSourceImpl(
+        sharedPreferences: context.read(),
+      ),
+    ),
 
     RepositoryProvider<CountriesRepository>(
       create: (context) => CountriesRepositoryImp(
@@ -50,6 +52,7 @@ class StateInjector {
     RepositoryProvider<OtpRepository>(
       create: (context) => OtpRepositoryImp(
         remoteDataSource: context.read<RemoteDataSource>(),
+        localDataSource: context.read<LocalDataSource>()
       ),
     ),
   ];
@@ -80,6 +83,10 @@ class StateInjector {
     BlocProvider<SendOtpCubit>(
       create: (BuildContext context) =>
           SendOtpCubit(otpRepository: context.read<OtpRepository>()),
+    ),
+    BlocProvider<VerifyOtpCubit>(
+      create: (BuildContext context) =>
+          VerifyOtpCubit(otpRepository: context.read<OtpRepository>()),
     ),
   ];
 }

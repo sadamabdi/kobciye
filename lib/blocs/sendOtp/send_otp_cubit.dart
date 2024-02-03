@@ -28,17 +28,4 @@ class SendOtpCubit extends Cubit<SendOtpState> {
       },
     );
   }
-
-  void verifyOtp(Map<String,dynamic> body) async {
-
-    final result = await _otpRepository.verifyOtp(body);
-    result.fold(
-      (failure) {
-       
-      },
-      (value) {
-      
-      },
-    );
-  }
 }

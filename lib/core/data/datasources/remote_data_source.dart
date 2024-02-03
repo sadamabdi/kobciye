@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:kobciye/models/response_model.dart';
 import 'network_parser.dart';
@@ -21,8 +22,13 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
   @override
   Future<ApiBaseResponse> httpGet({required String url}) async {
-    final headers = {'Accept': 'application/json'};
+    final headers = {'Content-Type': 'application/json'};
+
     final uri = Uri.parse(url);
+
+    if (kDebugMode) {
+      print(uri);
+    }
 
     final clientMethod = http.get(uri, headers: headers);
     final responseJsonBody =
@@ -33,10 +39,13 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   @override
   Future<ApiBaseResponse> httpPost(
       {required Map<String, dynamic> body, required String url}) async {
-    final headers = {'Accept': 'application/json'};
-    print(json.encode(body));
+    final headers = {'Content-Type': 'application/json'};
+    if (kDebugMode) {
+      print(url);
+      print(json.encode(body));
+    }
     final clientMethod =
-        client.post(Uri.parse(url), headers: headers, body:json.encode(body) );
+        client.post(Uri.parse(url), headers: headers, body: json.encode(body));
     final responseJsonBody =
         await NetworkParser.callClientWithCatchException(() => clientMethod);
     return ApiBaseResponse.fromMap(responseJsonBody);

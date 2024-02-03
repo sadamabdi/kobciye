@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kobciye/blocs/countries/selected_countries/selected_countries_cubit.dart';
-import 'package:kobciye/blocs/cubit/send_otp_cubit.dart';
+import 'package:kobciye/blocs/sendOtp/send_otp_cubit.dart';
 import 'package:kobciye/utils/custom_button.dart';
 import 'package:kobciye/utils/utitls.dart';
 import '../../constants/images.dart';

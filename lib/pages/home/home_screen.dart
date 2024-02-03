@@ -8,48 +8,52 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
-      child: Scaffold(
-          body: Padding(
-        padding: EdgeInsets.all(8.0),
-        child: CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(child: HeaderWidget()),
-            SliverToBoxAdapter(
-              child: SizedBox(
-                height: 20,
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: Text(
-                'HAQBAD /AYUUTO',
-                style: TextStyle(
-                  fontSize: 25,
-                ),
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: SizedBox(
-                height: 20,
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: Text(
-                AppConstants.homeProfitDescription,
-                style: TextStyle(
-                  fontSize: 16,
-                ),
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: SizedBox(
-                height: 25,
-              ),
-            ),
-            SliverToBoxAdapter(child: ProfitWidget()),
+    return Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          actions: [
+            IconButton(onPressed: () {}, icon: const Icon(Icons.logout))
           ],
         ),
-      )),
-    );
+        body: const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: CustomScrollView(
+            slivers: [
+              SliverToBoxAdapter(child: HeaderWidget()),
+              SliverToBoxAdapter(
+                child: SizedBox(
+                  height: 20,
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: Text(
+                  'HAQBAD /AYUUTO',
+                  style: TextStyle(
+                    fontSize: 25,
+                  ),
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: SizedBox(
+                  height: 20,
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: Text(
+                  AppConstants.homeProfitDescription,
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: SizedBox(
+                  height: 25,
+                ),
+              ),
+              SliverToBoxAdapter(child: ProfitWidget()),
+            ],
+          ),
+        ));
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kobciye/pages/home/widgets/rectancle_container.dart';
+import 'package:kobciye/utils/utitls.dart';
 
 import '../../../constants/app_constants.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -15,20 +16,16 @@ class OppertunityWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     void performActionAndShowDialer() async {
-      // Perform your initial action here
-
-      // Replace '123456789' with the desired phone number
       String phoneNumber = '123456789';
 
-      // Launch the phone dialer with the specified number
       String dialerUrl = 'tel:$phoneNumber';
       // ignore: deprecated_member_use
       if (await canLaunch(dialerUrl)) {
         // ignore: deprecated_member_use
         await launch(dialerUrl);
       } else {
-        // Handle error, e.g., show an error message
-        print('Could not launch $dialerUrl');
+        Utils.showCustomDialog(context,
+            child: Text('Could not launch $dialerUrl'));
       }
     }
 

@@ -3,6 +3,7 @@ class AppConstants {
   static const String splashTitle = "Welcome Shodog primary & Secondary School";
 
   static const String cachedUserResponseKey = "cachhUserResponse";
+  
 
   static const String fontFamily = 'Roboto';
 
