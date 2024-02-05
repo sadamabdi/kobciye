@@ -2,11 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
-
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
-import 'package:kobciye/blocs/verifyOtp/verify_otp_cubit.dart';
 
 import '../../error/exception.dart';
 import 'remote_data_source.dart';
@@ -15,12 +11,12 @@ class NetworkParser {
   static const _className = 'RemoteDataSourceImpl';
 
   static Future<dynamic> callClientWithCatchException(
-      CallClientMethod callClientMethod, context) async {
+      CallClientMethod callClientMethod) async {
     try {
       final response = await callClientMethod();
       log(response.statusCode.toString(), name: _className);
       log(response.body, name: _className);
-      return _responseParser(response,context);
+      return _responseParser(response);
     } on SocketException {
       log('SocketException', name: _className);
       throw const NetworkException('No internet connection', 10061);
@@ -37,7 +33,7 @@ class NetworkParser {
     }
   }
 
-  static _responseParser(http.Response response,BuildContext context) {
+  static _responseParser(http.Response response) {
     switch (response.statusCode) {
       case 200:
       case 201:
@@ -47,7 +43,6 @@ class NetworkParser {
         final errorMsg = parsingDoseNotExist(response.body);
         throw BadRequestException(errorMsg, 400);
       case 401:
-       context.read<VerifyOtpCubit>().logout();
         final errorMsg = parsingDoseNotExist(response.body);
         throw UnauthorisedException(errorMsg, 401);
       case 402:

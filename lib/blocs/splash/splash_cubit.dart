@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
+import 'package:kobciye/blocs/verifyOtp/verify_otp_cubit.dart';
 
 import '../../models/country_model.dart';
 import '../../models/custom_error.dart';
@@ -25,7 +27,11 @@ class SplashCubit extends Cubit<SplashState> {
     final result = await _countriesRepository.getCountries();
     result.fold(
       (failure) {
-        emit(SplashStateError(CustomError(message: failure.message)));
+        if (failure.statusCode == 401) {
+          Get.context!.read<VerifyOtpCubit>().logout();
+        }else {
+          emit(SplashStateError(CustomError(message: failure.message)));
+        }
       },
       (value) {
         allCountries = value;

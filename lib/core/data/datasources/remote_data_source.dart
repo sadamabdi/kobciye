@@ -33,7 +33,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
     final clientMethod = http.get(uri, headers: headers);
     final responseJsonBody =
-        await NetworkParser.callClientWithCatchException(() => clientMethod,Get.context!);
+        await NetworkParser.callClientWithCatchException(() => clientMethod);
     return ApiBaseResponse.fromMap(responseJsonBody);
   }
 
@@ -48,7 +48,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     final clientMethod =
         client.post(Uri.parse(url), headers: headers, body: json.encode(body));
     final responseJsonBody =
-        await NetworkParser.callClientWithCatchException(() => clientMethod,Get.context!);
+        await NetworkParser.callClientWithCatchException(() => clientMethod);
     return ApiBaseResponse.fromMap(responseJsonBody);
   }
 }

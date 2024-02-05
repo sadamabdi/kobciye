@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kobciye/blocs/countries/selected_countries/selected_countries_cubit.dart';
 import 'package:kobciye/blocs/sendOtp/send_otp_cubit.dart';
+import 'package:kobciye/models/country_model.dart';
 import 'package:kobciye/utils/custom_button.dart';
 import 'package:kobciye/utils/utitls.dart';
 import '../../constants/images.dart';
@@ -13,6 +14,21 @@ class SigninScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    CountryModel? selectedCountry =
+        context.watch<SelectedCountriesCubit>().state.selectedCountry;
+    String? phoneNumber;
+    submitButton(value) {
+      if (value == null) {
+        Utils.showSnackBar(context, 'Please enter a phone number');
+        return;
+      }
+      if (selectedCountry == null) {
+        Utils.showSnackBar(context, 'Please choose a country');
+        return;
+      }
+      context.read<SendOtpCubit>().sendOtp();
+    }
+
     return MultiBlocListener(
       listeners: [
         BlocListener<SendOtpCubit, SendOtpState>(
@@ -46,48 +62,45 @@ class SigninScreen extends StatelessWidget {
                   decoration: InputDecoration(
                     border: const OutlineInputBorder(),
                     labelText: 'phone number',
-                    prefixIcon: GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(
-                            context, RouteNames.countriesScreen);
-                      },
-                      child: SizedBox(
-                        width: 100,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: BlocBuilder<SelectedCountriesCubit,
-                              SelectedCountryState>(
-                            builder: (context, state) {
-                              return Row(
-                                children: [
-                                  CustomImage(
-                                    path: state.selectedCountry?.flagUrl1,
-                                    height: 25,
-                                    width: 30,
-                                    fit: BoxFit.cover,
-                                  ),
-                                  const SizedBox(width: 5),
-                                  Text(
-                                      '+${state.selectedCountry?.callingCodes}'),
-                                ],
-                              );
+                    prefixIcon: selectedCountry != null
+                        ? GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, RouteNames.countriesScreen);
                             },
-                          ),
-                        ),
-                      ),
-                    ),
+                            child: SizedBox(
+                              width: 100,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  children: [
+                                    CustomImage(
+                                      path: selectedCountry.flagUrl1,
+                                      height: 25,
+                                      width: 30,
+                                      fit: BoxFit.cover,
+                                    ),
+                                    const SizedBox(width: 5),
+                                    Text('+${selectedCountry.callingCodes}'),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          )
+                        : null,
                   ),
                   validator: (String? value) {
                     return null;
                   },
-                  onSaved: (String? value) {},
+                  onChanged: (String value) {
+                    phoneNumber = value;
+                  },
+                  onSaved: (String? value) => submitButton,
                 ),
                 const SizedBox(height: 30.0),
                 PrimaryButton(
                   text: 'Sign In',
-                  onPressed: () {
-                    context.read<SendOtpCubit>().sendOtp();
-                  },
+                  onPressed: () => submitButton(phoneNumber),
                   borderRadiusSize: 15,
                 ),
               ],

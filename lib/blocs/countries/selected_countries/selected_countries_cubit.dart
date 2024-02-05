@@ -6,7 +6,7 @@ part 'selected_countries_state.dart';
 
 class SelectedCountriesCubit extends Cubit<SelectedCountryState> {
 
-  final CountryModel initialCountry;
+  final CountryModel? initialCountry;
    
   SelectedCountriesCubit({required this.initialCountry}) : super(SelectedCountryState(selectedCountry: initialCountry));
 

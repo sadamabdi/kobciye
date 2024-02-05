@@ -78,7 +78,7 @@ class StateInjector {
     ),
     BlocProvider<SelectedCountriesCubit>(
       create: (BuildContext context) => SelectedCountriesCubit(
-          initialCountry: context.read<SplashCubit>().initialCountry!),
+          initialCountry: context.read<SplashCubit>().initialCountry),
     ),
     BlocProvider<SendOtpCubit>(
       create: (BuildContext context) =>

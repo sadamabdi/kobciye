@@ -14,9 +14,11 @@ class HomeScreen extends StatelessWidget {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           actions: [
-            IconButton(onPressed: () {
-              context.read<VerifyOtpCubit>().logout();
-            }, icon: const Icon(Icons.logout))
+            IconButton(
+                onPressed: () {
+                  context.read<VerifyOtpCubit>().logout();
+                },
+                icon: const Icon(Icons.logout))
           ],
         ),
         body: const Padding(
