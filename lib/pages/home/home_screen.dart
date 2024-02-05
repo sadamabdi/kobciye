@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kobciye/blocs/verifyOtp/verify_otp_cubit.dart';
 import '../../constants/app_constants.dart';
 import 'widgets/header.dart';
 import 'widgets/profit_widget.dart';
@@ -12,7 +14,9 @@ class HomeScreen extends StatelessWidget {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           actions: [
-            IconButton(onPressed: () {}, icon: const Icon(Icons.logout))
+            IconButton(onPressed: () {
+              context.read<VerifyOtpCubit>().logout();
+            }, icon: const Icon(Icons.logout))
           ],
         ),
         body: const Padding(

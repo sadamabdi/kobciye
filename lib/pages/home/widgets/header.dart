@@ -30,9 +30,13 @@ class HeaderWidget extends StatelessWidget {
             ),
           ],
         ),
-        const Expanded(
-          child: CustomImage(
-            path: Images.headerIMg,
+         Expanded(
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(8.0),
+            child: const CustomImage(
+              path: Images.headerIMg,
+          
+            ),
           ),
         ),
       ],

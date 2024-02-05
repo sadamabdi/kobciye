@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:kobciye/constants/app_constants.dart';
 import 'package:kobciye/core/router_name.dart';
 import 'package:kobciye/theme/light_theme.dart';
@@ -28,8 +29,9 @@ class MyApp extends StatelessWidget {
       providers: StateInjector.repositoryProviders,
       child: MultiBlocProvider(
         providers: StateInjector.blocProviders,
-        child: MaterialApp(
+        child: GetMaterialApp(
           title: AppConstants.appName,
+          navigatorKey: Get.key,
           debugShowCheckedModeBanner: false,
           theme: light(),
           onGenerateRoute: RouteNames.generateRoute,

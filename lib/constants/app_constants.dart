@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class AppConstants {
   static const String appName = "Kobciye";
   static const String splashTitle = "Welcome Shodog primary & Secondary School";
@@ -11,11 +13,19 @@ class AppConstants {
       'Si aad u hesho Faaido joogto ah taas oo ka bilaabmaysa marka aad is diiwan galiso oo aad bixio \$1 khidmadda diiwan galinta waxaa heli doontaa';
 }
 
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
 class Profit {
   final int percent;
   final String text;
   const Profit({required this.percent, required this.text});
 }
+
+class NavigationService { 
+  static GlobalKey<NavigatorState> navigatorKey = 
+  GlobalKey<NavigatorState>();
+}
+
 
 // List of Profit objects
 List<Profit> profitList = const [

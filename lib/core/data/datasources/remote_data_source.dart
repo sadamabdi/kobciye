@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:kobciye/models/response_model.dart';
 import 'network_parser.dart';
@@ -32,7 +33,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
     final clientMethod = http.get(uri, headers: headers);
     final responseJsonBody =
-        await NetworkParser.callClientWithCatchException(() => clientMethod);
+        await NetworkParser.callClientWithCatchException(() => clientMethod,Get.context!);
     return ApiBaseResponse.fromMap(responseJsonBody);
   }
 
@@ -47,7 +48,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
     final clientMethod =
         client.post(Uri.parse(url), headers: headers, body: json.encode(body));
     final responseJsonBody =
-        await NetworkParser.callClientWithCatchException(() => clientMethod);
+        await NetworkParser.callClientWithCatchException(() => clientMethod,Get.context!);
     return ApiBaseResponse.fromMap(responseJsonBody);
   }
 }
