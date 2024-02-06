@@ -2,8 +2,10 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:kobciye/core/data/datasources/api_checker.dart';
 import 'package:kobciye/core/router_name.dart';
 import 'package:kobciye/models/verify_model.dart';
+import 'package:kobciye/utils/utitls.dart';
 import '../../models/custom_error.dart';
 import '../../repositories/otp_repository.dart';
 
@@ -37,7 +39,9 @@ class VerifyOtpCubit extends Cubit<VerifyOtpState> {
     final result = await _otpRepository.verifyOtp(body);
     result.fold(
       (failure) {
-        emit(VerifyOtpStateError(CustomError(message: failure.message)));
+        if (!ApiChecker.checkApi(failure)) {
+          emit(VerifyOtpStateError(CustomError(message: failure.message)));
+        }
       },
       (value) {
         _user = value;
@@ -49,7 +53,9 @@ class VerifyOtpCubit extends Cubit<VerifyOtpState> {
   void logout() async {
     final result = await _otpRepository.logOut();
     result.fold(
-      (failure) {},
+      (failure) {
+        Utils.showSnackBar(Get.context!, failure.message);
+      },
       (value) {
         Navigator.pushNamed(Get.context!, RouteNames.signinScreen);
       },

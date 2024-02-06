@@ -1,17 +1,17 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
-import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:kobciye/constants/app_constants.dart';
 import 'package:kobciye/models/response_model.dart';
+import 'package:kobciye/models/verify_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'network_parser.dart';
 
 abstract class RemoteDataSource {
   Future<ApiBaseResponse> httpGet({required String url});
   Future<ApiBaseResponse> httpPost(
       {required Map<String, dynamic> body, required String url});
-  // Future<String> passwordChange(
-  //     ChangePasswordStateModel changePassData, String StudentId);
 }
 
 typedef CallClientMethod = Future<http.Response> Function();
@@ -21,9 +21,29 @@ class RemoteDataSourceImpl implements RemoteDataSource {
 
   RemoteDataSourceImpl({required this.client});
 
+  Future<String> getToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? jsonString = prefs.getString(AppConstants.cachedUserResponseKey);
+    String token = '';
+
+    if (jsonString != null && jsonString.isEmpty) {
+      Map<String, dynamic> jsonMap = jsonDecode(jsonString);
+      token = VerifyOtp.fromMap(jsonMap).accessToken;
+    }
+    if (kDebugMode) {
+      print('token $token');
+    }
+    return token;
+  }
+
   @override
   Future<ApiBaseResponse> httpGet({required String url}) async {
-    final headers = {'Content-Type': 'application/json'};
+    String token = await getToken();
+
+    final headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token'
+    };
 
     final uri = Uri.parse(url);
 
@@ -40,7 +60,12 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   @override
   Future<ApiBaseResponse> httpPost(
       {required Map<String, dynamic> body, required String url}) async {
-    final headers = {'Content-Type': 'application/json'};
+    String token = await getToken();
+
+    final headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token'
+    };
     if (kDebugMode) {
       print(url);
       print(json.encode(body));

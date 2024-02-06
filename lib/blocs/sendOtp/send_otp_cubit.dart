@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../core/data/datasources/api_checker.dart';
 import '../../models/custom_error.dart';
 import '../../models/verification_model.dart';
 import '../../repositories/otp_repository.dart';
@@ -20,7 +21,9 @@ class SendOtpCubit extends Cubit<SendOtpState> {
     final result = await _otpRepository.sendOtp();
     result.fold(
       (failure) {
-        emit(SendOtpStateError(CustomError(message: failure.message)));
+        if (!ApiChecker.checkApi(failure)) {
+          emit(SendOtpStateError(CustomError(message: failure.message)));
+        }
       },
       (value) {
         otpResponse = value;

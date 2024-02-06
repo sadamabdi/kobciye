@@ -24,8 +24,7 @@ class OppertunityWidget extends StatelessWidget {
         // ignore: deprecated_member_use
         await launch(dialerUrl);
       } else {
-        Utils.showCustomDialog(context,
-            child: Text('Could not launch $dialerUrl'));
+        Utils.showSnackBar(context, 'Could not launch $dialerUrl');
       }
     }
 

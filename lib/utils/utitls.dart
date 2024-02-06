@@ -102,4 +102,6 @@ class Utils {
   static void closeKeyBoard(BuildContext context) {
     FocusScope.of(context).requestFocus(FocusNode());
   }
+
+  
 }

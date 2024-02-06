@@ -27,11 +27,7 @@ class SplashCubit extends Cubit<SplashState> {
     final result = await _countriesRepository.getCountries();
     result.fold(
       (failure) {
-        if (failure.statusCode == 401) {
-          Get.context!.read<VerifyOtpCubit>().logout();
-        }else {
-          emit(SplashStateError(CustomError(message: failure.message)));
-        }
+        emit(SplashStateError(CustomError(message: failure.message)));
       },
       (value) {
         allCountries = value;

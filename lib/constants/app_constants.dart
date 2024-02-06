@@ -21,12 +21,6 @@ class Profit {
   const Profit({required this.percent, required this.text});
 }
 
-class NavigationService { 
-  static GlobalKey<NavigatorState> navigatorKey = 
-  GlobalKey<NavigatorState>();
-}
-
-
 // List of Profit objects
 List<Profit> profitList = const [
   Profit(percent: 94, text: 'Faaido Bille ah'),

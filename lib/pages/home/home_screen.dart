@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kobciye/blocs/verifyOtp/verify_otp_cubit.dart';
+import 'package:kobciye/constants/styles.dart';
 import '../../constants/app_constants.dart';
 import 'widgets/header.dart';
 import 'widgets/profit_widget.dart';
@@ -21,30 +22,26 @@ class HomeScreen extends StatelessWidget {
                 icon: const Icon(Icons.logout))
           ],
         ),
-        body: const Padding(
-          padding: EdgeInsets.all(8.0),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
           child: CustomScrollView(
             slivers: [
-              SliverToBoxAdapter(child: HeaderWidget()),
-              SliverToBoxAdapter(
+              const SliverToBoxAdapter(child: HeaderWidget()),
+              const SliverToBoxAdapter(
                 child: SizedBox(
                   height: 20,
                 ),
               ),
               SliverToBoxAdapter(
-                child: Text(
-                  'HAQBAD /AYUUTO',
-                  style: TextStyle(
-                    fontSize: 25,
-                  ),
-                ),
+                child: Text('HAQBAD /AYUUTO',
+                    style: robotoRegular.copyWith(fontSize: 25)),
               ),
-              SliverToBoxAdapter(
+              const SliverToBoxAdapter(
                 child: SizedBox(
                   height: 20,
                 ),
               ),
-              SliverToBoxAdapter(
+              const SliverToBoxAdapter(
                 child: Text(
                   AppConstants.homeProfitDescription,
                   style: TextStyle(
@@ -52,12 +49,12 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              SliverToBoxAdapter(
+              const SliverToBoxAdapter(
                 child: SizedBox(
                   height: 25,
                 ),
               ),
-              SliverToBoxAdapter(child: ProfitWidget()),
+              const SliverToBoxAdapter(child: ProfitWidget()),
             ],
           ),
         ));

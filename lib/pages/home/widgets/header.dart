@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kobciye/constants/styles.dart';
 
 import '../../../constants/images.dart';
 import '../../../utils/custom_image.dart';
@@ -16,26 +17,24 @@ class HeaderWidget extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Somali circle \n Profit',
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-            ),
+            Text('Somali circle \n Profit',
+                style: robotoBold.copyWith(fontSize: 30)
+                // style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                ),
             Text(
               'HEL HANTI',
-              style: TextStyle(
+              style: robotoBold.copyWith(
                 fontSize: 30,
                 color: Theme.of(context).primaryColor,
-                fontWeight: FontWeight.bold,
               ),
             ),
           ],
         ),
-         Expanded(
+        Expanded(
           child: ClipRRect(
             borderRadius: BorderRadius.circular(8.0),
             child: const CustomImage(
               path: Images.headerIMg,
-          
             ),
           ),
         ),
