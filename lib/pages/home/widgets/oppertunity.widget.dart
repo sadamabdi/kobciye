@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kobciye/core/router_name.dart';
 import 'package:kobciye/pages/home/widgets/rectancle_container.dart';
 import 'package:kobciye/utils/utitls.dart';
 
@@ -65,7 +66,9 @@ class OppertunityWidget extends StatelessWidget {
             width: screenWidth * 0.3,
             text: 'Bixi \$1',
             isLine: false,
-            onClick: () => performActionAndShowDialer(),
+            onClick: () {
+              Navigator.pushNamed(context, RouteNames.videoScreen);
+            },
           )
         ],
       ),

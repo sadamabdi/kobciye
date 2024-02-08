@@ -3,6 +3,7 @@ import 'package:kobciye/pages/authentication/otp_screen.dart';
 import 'package:kobciye/pages/countries/countries_screen.dart';
 import 'package:kobciye/pages/authentication/signin_screen.dart';
 import 'package:kobciye/pages/splash/splash_screen.dart';
+import 'package:kobciye/pages/video/video_screen.dart';
 
 import '../pages/home/home_screen.dart';
 
@@ -12,6 +13,7 @@ class RouteNames {
   static const String signinScreen = '/signinScreen';
   static const String homeScreen = '/homeScreen';
   static const String otpScreen = '/OtpScreen';
+  static const String videoScreen = '/videoScreen';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -30,6 +32,9 @@ class RouteNames {
       case RouteNames.otpScreen:
         return MaterialPageRoute(
             settings: settings, builder: (_) => const OtpScreen());
+      case RouteNames.videoScreen:
+        return MaterialPageRoute(
+            settings: settings, builder: (_) => const VideoScreen());
       // case RouteNames.resultScreen:
       //   final body = settings.arguments as Map<String, dynamic>;
       //   return MaterialPageRoute(

@@ -10,7 +10,7 @@ class AppConstants {
   static const String fontFamily = 'Roboto';
 
   static const String homeProfitDescription =
-      'Si aad u hesho Faaido joogto ah taas oo ka bilaabmaysa marka aad is diiwan galiso oo aad bixio \$1 khidmadda diiwan galinta waxaa heli doontaa';
+      'Si aad u hesho Faaido joogto ah taas oo ka bilaabmaysa marka aad is diiwan galiso oo aad bixiso \$1 khidmadda diiwan galinta waxaa heli doontaa';
 }
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();

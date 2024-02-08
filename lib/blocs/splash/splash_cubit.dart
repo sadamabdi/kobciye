@@ -1,8 +1,5 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
-import 'package:kobciye/blocs/verifyOtp/verify_otp_cubit.dart';
-
 import '../../models/country_model.dart';
 import '../../models/custom_error.dart';
 import '../../repositories/countries_repository.dart';

@@ -14,12 +14,23 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
+          title: Text(
+            'Welcome',
+            style: robotoBold.copyWith(
+                fontSize: 25, color: Theme.of(context).primaryColor),
+          ),
+          centerTitle: false,
           actions: [
             IconButton(
-                onPressed: () {
-                  context.read<VerifyOtpCubit>().logout();
-                },
-                icon: const Icon(Icons.logout))
+              onPressed: () {
+                context.read<VerifyOtpCubit>().logout();
+              },
+              icon: Icon(
+                Icons.exit_to_app,
+                color: Theme.of(context).primaryColor,
+                size: 25,
+              ),
+            )
           ],
         ),
         body: Padding(
@@ -33,7 +44,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               SliverToBoxAdapter(
-                child: Text('HAQBAD /AYUUTO',
+                child: Text('HAGBAD /AYUUTO',
                     style: robotoRegular.copyWith(fontSize: 25)),
               ),
               const SliverToBoxAdapter(
@@ -41,12 +52,10 @@ class HomeScreen extends StatelessWidget {
                   height: 20,
                 ),
               ),
-              const SliverToBoxAdapter(
+              SliverToBoxAdapter(
                 child: Text(
                   AppConstants.homeProfitDescription,
-                  style: TextStyle(
-                    fontSize: 16,
-                  ),
+                  style: robotoRegular.copyWith(fontSize: 16),
                 ),
               ),
               const SliverToBoxAdapter(
